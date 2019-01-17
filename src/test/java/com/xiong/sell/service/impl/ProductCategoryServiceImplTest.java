@@ -1,4 +1,4 @@
-package com.xiong.sell.service;
+package com.xiong.sell.service.impl;
 
 import com.xiong.sell.dataobject.ProductCategory;
 import com.xiong.sell.service.impl.ProductCategoryServiceImpl;

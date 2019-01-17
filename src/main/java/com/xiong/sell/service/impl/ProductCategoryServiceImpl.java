@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * 类目
+ *
  * @author Xiong YuSong
  * 2019/1/17 11:28
  */
@@ -21,9 +23,9 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Override
     public ProductCategory findOne(Integer categoryId) {
-        Optional<ProductCategory> optional =  productCategoryRepository.findById(categoryId);
+        Optional<ProductCategory> optional = productCategoryRepository.findById(categoryId);
         ProductCategory productCategory = null;
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             productCategory = optional.get();
         }
         return productCategory;

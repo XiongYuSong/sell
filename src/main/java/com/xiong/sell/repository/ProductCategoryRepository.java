@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 /**
+ * 类目
+ *
  * @author Xiong YuSong
  * 2019/1/17 9:39
  */
