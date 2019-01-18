@@ -3,8 +3,7 @@ package com.xiong.sell.service.impl;
 import com.xiong.sell.dataobject.OrderDetail;
 import com.xiong.sell.dto.OrderDTO;
 import com.xiong.sell.enums.OrderStatusEnum;
-import com.xiong.sell.enums.PayStatusEnum;
-import lombok.extern.log4j.Log4j;
+import com.xiong.sell.enums.ProductStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,8 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Xiong YuSong
@@ -96,6 +93,6 @@ public class OrderServiceImplTest {
     public void paid() {
         OrderDTO orderDTO = orderService.findOne(ORDER_ID);
         OrderDTO result = orderService.paid(orderDTO);
-        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(), result.getPayStatus());
+        Assert.assertEquals(ProductStatusEnum.PayStatusEnum.SUCCESS.getCode(), result.getPayStatus());
     }
 }

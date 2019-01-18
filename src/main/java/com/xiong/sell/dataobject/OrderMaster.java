@@ -1,7 +1,7 @@
 package com.xiong.sell.dataobject;
 
 import com.xiong.sell.enums.OrderStatusEnum;
-import com.xiong.sell.enums.PayStatusEnum;
+import com.xiong.sell.enums.ProductStatusEnum;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -57,7 +57,7 @@ public class OrderMaster {
     /**
      * 支付状态, 默认为0未支付.
      */
-    private Integer payStatus = PayStatusEnum.WAIT.getCode();
+    private Integer payStatus = ProductStatusEnum.PayStatusEnum.WAIT.getCode();
 
     /**
      * 创建时间.

@@ -7,7 +7,7 @@ import com.xiong.sell.dataobject.ProductInfo;
 import com.xiong.sell.dto.CartDTO;
 import com.xiong.sell.dto.OrderDTO;
 import com.xiong.sell.enums.OrderStatusEnum;
-import com.xiong.sell.enums.PayStatusEnum;
+import com.xiong.sell.enums.ProductStatusEnum;
 import com.xiong.sell.enums.ResultEnum;
 import com.xiong.sell.exception.SellException;
 import com.xiong.sell.repository.OrderDetailRepository;
@@ -77,7 +77,7 @@ public class OrderServiceImpl implements OrderService {
         orderDTO.setOrderAmount(orderAmount);
         BeanUtils.copyProperties(orderDTO, orderMaster);
         orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
-        orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
+        orderMaster.setPayStatus(ProductStatusEnum.PayStatusEnum.WAIT.getCode());
 
         orderMasterRepository.save(orderMaster);
         //4.扣库存
@@ -140,7 +140,7 @@ public class OrderServiceImpl implements OrderService {
                 .collect(Collectors.toList());
         productInfoService.increaseStock(cartDTOList);
         //如果已支付, 需要退款
-        if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())) {
+        if (orderDTO.getPayStatus().equals(ProductStatusEnum.PayStatusEnum.SUCCESS.getCode())) {
             //TODO
         }
         return orderDTO;
@@ -176,12 +176,12 @@ public class OrderServiceImpl implements OrderService {
             throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
         }
         //判断支付状态
-        if (!orderDTO.getPayStatus().equals(PayStatusEnum.WAIT.getCode())) {
+        if (!orderDTO.getPayStatus().equals(ProductStatusEnum.PayStatusEnum.WAIT.getCode())) {
             log.error("【订单支付完成】订单支付状态不正确, orderDTO={}", orderDTO);
             throw new SellException(ResultEnum.ORDER_PAY_STATUS_ERROR);
         }
         //修改支付状态
-        orderDTO.setPayStatus(PayStatusEnum.SUCCESS.getCode());
+        orderDTO.setPayStatus(ProductStatusEnum.PayStatusEnum.SUCCESS.getCode());
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDTO, orderMaster);
         OrderMaster updateResult = orderMasterRepository.save(orderMaster);

@@ -1,11 +1,8 @@
 package com.xiong.sell.dto;
 
 import com.xiong.sell.dataobject.OrderDetail;
-import com.xiong.sell.enums.OrderStatusEnum;
-import com.xiong.sell.enums.PayStatusEnum;
 import lombok.Data;
 
-import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
