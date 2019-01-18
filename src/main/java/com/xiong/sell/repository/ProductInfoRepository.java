@@ -13,5 +13,11 @@ import java.util.List;
  */
 public interface ProductInfoRepository extends JpaRepository<ProductInfo, String> {
 
+    /**
+     * 通过商品上架状态查找商品
+     *
+     * @param productStatus
+     * @return
+     */
     List<ProductInfo> findByProductStatus(Integer productStatus);
 }

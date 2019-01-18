@@ -6,7 +6,7 @@ import com.xiong.sell.vo.ResultVO;
  * @author Xiong YuSong
  * 2019/1/17 18:35
  */
-public class ResultVOUtils {
+public class ResultVOUtil {
 
     public static ResultVO success(Object object){
         ResultVO resultVO = new ResultVO();
