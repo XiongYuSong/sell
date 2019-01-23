@@ -3,6 +3,7 @@ package com.xiong.sell.service.impl;
 import com.xiong.sell.dataobject.OrderDetail;
 import com.xiong.sell.dto.OrderDTO;
 import com.xiong.sell.enums.OrderStatusEnum;
+import com.xiong.sell.enums.PayStatusEnum;
 import com.xiong.sell.enums.ProductStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -93,6 +94,6 @@ public class OrderServiceImplTest {
     public void paid() {
         OrderDTO orderDTO = orderService.findOne(ORDER_ID);
         OrderDTO result = orderService.paid(orderDTO);
-        Assert.assertEquals(ProductStatusEnum.PayStatusEnum.SUCCESS.getCode(), result.getPayStatus());
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(), result.getPayStatus());
     }
 }
