@@ -1,8 +1,10 @@
 package com.xiong.sell.dataobject;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * 类目表
@@ -13,6 +15,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "product_category")
+@DynamicUpdate
 public class ProductCategory {
     /**
      * 类目ID
@@ -28,6 +31,16 @@ public class ProductCategory {
      * 类目编号
      */
     private Integer categoryType;
+
+    /**
+     * 创建时间.
+     */
+    private Date createTime;
+
+    /**
+     * 更新时间.
+     */
+    private Date updateTime;
 
     public ProductCategory() {
     }
