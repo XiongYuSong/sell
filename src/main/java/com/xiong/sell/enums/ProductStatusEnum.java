@@ -9,7 +9,7 @@ import lombok.Getter;
  * 2019/1/17 15:39
  */
 @Getter
-public enum ProductStatusEnum {
+public enum ProductStatusEnum implements CodeEnum {
     /**
      * 表示上架商品
      */

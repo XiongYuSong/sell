@@ -83,4 +83,38 @@ public class ProductInfoServiceImpl implements ProductInfoService {
             productInfoRepository.save(productInfo);
         }
     }
+
+    @Override
+    @Transactional(rollbackOn = Exception.class)
+    public ProductInfo onSale(String productId) {
+        //判断商品是否存在
+        ProductInfo productInfo = findOne(productId);
+        if(productInfo == null){
+            throw  new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        //判断状态是否正确
+        if(productInfo.getProductStatusEnum() == ProductStatusEnum.UP){
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        //下架操作
+        productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
+        return productInfoRepository.save(productInfo);
+    }
+
+    @Override
+    @Transactional(rollbackOn = Exception.class)
+    public ProductInfo offSale(String productId) {
+        //判断商品是否存在
+        ProductInfo productInfo = findOne(productId);
+        if(productInfo == null){
+            throw  new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        //判断状态是否正确
+        if(productInfo.getProductStatusEnum() == ProductStatusEnum.DOWN){
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        //上架操作
+        productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
+        return productInfoRepository.save(productInfo);
+    }
 }
