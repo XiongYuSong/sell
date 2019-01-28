@@ -31,6 +31,8 @@ public enum ResultEnum {
     PRODUCT_OFF_SALE_SUCCESS(25,"商品下架成功"),
     PRODUCT_SAVE_SUCCESS(26,"商品保存成功"),
     CATEGORY_SAVE_SUCCESS(26,"类目保存成功"),
+    LOGIN_FAIL(27,"登录失败，openid错误"),
+    LOGOUT_SUCCESS(27,"登出成功"),
     ;
     private Integer code;
 

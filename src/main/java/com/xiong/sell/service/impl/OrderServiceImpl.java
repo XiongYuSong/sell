@@ -15,6 +15,8 @@ import com.xiong.sell.repository.OrderDetailRepository;
 import com.xiong.sell.repository.OrderMasterRepository;
 import com.xiong.sell.service.OrderService;
 import com.xiong.sell.service.ProductInfoService;
+import com.xiong.sell.service.PushMessage;
+import com.xiong.sell.service.WebSocket;
 import com.xiong.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -47,6 +49,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+
+    @Autowired
+    private PushMessage pushMessage;
+
+    @Autowired
+    private WebSocket webSocket;
 
 
     @Override
@@ -85,6 +93,8 @@ public class OrderServiceImpl implements OrderService {
         List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream().map(e ->
                 new CartDTO(e.getProductId(), e.getProductQuantity())).collect(Collectors.toList());
         productInfoService.decreaseStock(cartDTOList);
+        //webSocket推送消息
+        webSocket.sendMessage("您有新的订单");
         return orderDTO;
     }
 
@@ -144,6 +154,8 @@ public class OrderServiceImpl implements OrderService {
         if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())) {
             //TODO
         }
+        //取消订单则推送消息
+        pushMessage.orderStatus(orderDTO);
         return orderDTO;
     }
 
